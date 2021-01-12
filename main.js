@@ -1,19 +1,25 @@
-//main.js
+const fs = require('fs');
 const Discord = require('discord.js');
 const {prefix, token} = require('./config.json');
 const client = new Discord.Client();
+client.commands = new Discord.Collection();
+//Add all the command files dynamically
+const commandFiles = fs.readdirSync('./commands').filter(file => file.endsWith('.js'));
 
+for (const file of commandFiles) {
+	const command = require(`./commands/${file}`);
+	client.commands.set(command.name, command);
+}
 client.once('ready', () => {
 	console.log('Ready!');
 });
-
-client.login(token);
-//TODO:Later add the commands to their specific files
 client.on('message', message => {
-if(message.content === `${prefix}bet`){
-    message.channel.send('Command is coming soon!');
-}else if(message.content === `${prefix}view`)
-{
-    message.channel.send('Command is coming soon!');
-}
-});
+	if (!message.content.startsWith(prefix) || message.author.bot) return;
+	const args = message.content.slice(prefix.length).trim().split(/ +/);
+	const command = args.shift().toLowerCase();
+	if(command === 'bet'){
+    		message.channel.send('Command is coming soon!');
+	}else if(command  === `view`){
+    		message.channel.send('Command is coming soon!');}
+	});
+client.login(token);
