@@ -1,6 +1,11 @@
+//Add required modues etc.
 const fs = require('fs');
+const {Users} = require('./dbObjects.js');
 const Discord = require('discord.js');
 const {prefix, token} = require('./config.json');
+const { Op } = require('sequelize');
+//Discord objects
+const currency = new Discord.Collection();
 const client = new Discord.Client();
 client.commands = new Discord.Collection();
 //Add all the command files dynamically
@@ -10,8 +15,11 @@ for (const file of commandFiles) {
 	const command = require(`./commands/${file}`);
 	client.commands.set(command.name, command);
 }
-client.once('ready', () => {
-	console.log('Ready!');
+
+client.once('ready', async () => {
+	const storedBalances = await Users.findAll();
+	storedBalances.forEach(b => currency.set(b.user_id, b));
+	console.log(`Logged in as ${client.user.tag}!`);
 });
 client.on('message', message => {
 	if (!message.content.startsWith(prefix) || message.author.bot) return;
