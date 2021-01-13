@@ -7,7 +7,7 @@ module.exports = {
 	name: 'view',
 	description: 'View all the bets available this week',
 	arguments: 'Add a team name to view bets available for a specific team.',
-	usage:`\${prefix}view [team name]\``,
+	usage:`\`${prefix}view [team name]\``,
 	execute(message) {
 		message.channel.send('Command coming soon!');
 	},
