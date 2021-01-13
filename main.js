@@ -16,10 +16,16 @@ client.once('ready', () => {
 client.on('message', message => {
 	if (!message.content.startsWith(prefix) || message.author.bot) return;
 	const args = message.content.slice(prefix.length).trim().split(/ +/);
-	const command = args.shift().toLowerCase();
-	if(command === 'bet'){
-    		message.channel.send('Command is coming soon!');
-	}else if(command  === `view`){
-    		message.channel.send('Command is coming soon!');}
+	const commandName = args.shift().toLowerCase();
+	const command = client.commands.get(commandName)
+	
+	if(!client.commands.has(commandName)) return;
+	try {
+		command.execute(message, args);
+		}
+	catch (error){
+		console.error(error);
+		message.reply('Something went wrong, please try again!')
+	}
 	});
 client.login(token);
