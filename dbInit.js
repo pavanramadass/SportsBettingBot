@@ -1,3 +1,4 @@
+//Initialize a connection to sequelize.
 const Sequelize = require('sequelize');
 const sequelize = new Sequelize({
 	host: 'localhost',
@@ -5,6 +6,7 @@ const sequelize = new Sequelize({
 	logging: false,
 	storage: 'database.sqlite',
 });
+//Connect the models.
 require('./models/Users')(sequelize, Sequelize.DataTypes);
 
 const force = process.argv.includes('--force') || process.argv.includes('-f');
