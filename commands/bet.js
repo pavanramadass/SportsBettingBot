@@ -12,10 +12,10 @@ module.exports = {
     description: 'Make a bet', 
     arguments: 'Add a team, bet type, and coins to make a bet.',
     usage: `\`${prefix}bet [team name] [bet type] [coins]\``,
-    execute(message) {
-        const team_name = arg[1];
-        const bet_type = arg[2];
-        const coins = arg[3];
+    execute(message, args) {
+        const team_name = args[0];
+        const bet_type = args[1];
+        const coins = args[2];
 
         if(!team_names.includes(team_name)) {
             message.reply('Your team name is invalid. Please, submit a valid team name to !bet.');
