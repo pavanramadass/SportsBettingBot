@@ -1,6 +1,6 @@
 const { prefix } = require('../config.json');
 
-let player_ID = Math.floor((Math.random() * 100) + 1); 
+var player_ID = Math.floor((Math.random() * 100) + 1); 
 
 module.exports = {
   name: 'signup',
