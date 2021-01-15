@@ -10,7 +10,7 @@ module.exports = {
   execute(message, args) {
     let firstname = args[0];
     let lastname = args[1];
-    message.reply(`Thank you, ${firstname} for signing up! You have been given a starting balance of $1,000. Your player ID has been sent to your DM. If you wish to delete your account, then use the player ID to delete the account.`);
-    message.author.send(`Your player ID is ${player_ID}`); 
+    message.reply(`Thank you, ${firstname} for signing up! You have been given a starting balance of $1,000. Your player ID has been sent to your DM.`);
+    message.author.send(`Your player ID is ${player_ID}. If you wish to delete your account, then use the player ID to delete the account.`); 
   },
 };
